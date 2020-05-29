@@ -18,8 +18,12 @@ function save_identity_field (type, value) {
         tx.addTag('Type', type)
         await arweave.transactions.sign(tx, wallet)
         console.log(tx.id)
-        await arweave.transactions.post(tx)
-        alert('Your Arweave profile will be updated soon!')
+        var valid = await arweave.transactions.verify(tx)
+        if (valid == true)
+            { 
+                alert('Arweave tx is valid!');
+            }
+        else { alert('Arweave tx is invalid!')}
         
         $(".btn-save").removeClass("disabled").removeClass("wait");
     })()

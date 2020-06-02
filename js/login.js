@@ -12,20 +12,21 @@ function login (files) {
     } catch (err) {
         alert('Error: '+err);
     }
+    if (files !== null){
+        var fr = new FileReader()
+        fr.onload = function (ev) {
+            try {
+                wallet = JSON.parse(ev.target.result)
     
-    var fr = new FileReader()
-    fr.onload = function (ev) {
-        try {
-            wallet = JSON.parse(ev.target.result)
-
-            var public_address;
-            arweave.wallets.jwkToAddress(wallet).then((address) => {
-                public_address = address;
-                update_login_state(true, public_address);
-            });
-        } catch (err) {
-            alert('Error logging in: ' + err)
+                var public_address;
+                arweave.wallets.jwkToAddress(wallet).then((address) => {
+                    public_address = address;
+                    update_login_state(true, public_address);
+                });
+            } catch (err) {
+                alert('Error logging in: ' + err)
+            }
         }
+        fr.readAsText(files[0])    
     }
-    fr.readAsText(files[0])
 }

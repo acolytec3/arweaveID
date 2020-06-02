@@ -10,7 +10,7 @@ function login (files) {
             });
         })
     } catch (err) {
-        console.log('Error: '+err);
+        alert('Error: '+err);
     }
     
     var fr = new FileReader()

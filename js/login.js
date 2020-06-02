@@ -1,18 +1,22 @@
 function login (files) {
-    try
-    {
-        walletAPI.getPublicKey().then(function (address) {
-            var public_address;
-            console.log('Received public key is ' + address);
-            arweave.wallets.jwkToAddress(address).then((address) => {
-                public_address = address;
-                update_login_state(true, public_address);
-            });
-        })
-    } catch (err) {
-        alert('Error: '+err);
+    if (files === null){
+        try
+        {
+            
+            walletAPI.getPublicKey().then(function (address) {
+                var public_address;
+                console.log('Received public key is ' + address);
+                arweave.wallets.jwkToAddress(address).then((address) => {
+                    public_address = address;
+                    update_login_state(true, public_address);
+                });
+            })
+        } catch (err) {
+            alert('Error: '+err);
+        }
+        
     }
-    if (files !== null){
+    else {
         var fr = new FileReader()
         fr.onload = function (ev) {
             try {

@@ -1,5 +1,5 @@
 function login (files) {
-    if (files === null){
+    if (files == null){
         try
         {
             
